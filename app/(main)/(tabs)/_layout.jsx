@@ -29,7 +29,8 @@ export default function TabLayout() {
           title: 'Library',
           tabBarIcon: ({ color }) => (
             <FontAwesome name="book" size={28} color={color} />
-          )
+          ),
+          headerShown: false
         }}
       />
       <Tabs.Screen
