@@ -29,7 +29,8 @@ export default function TabLayout() {
           title: 'Library',
           tabBarIcon: ({ color }) => (
             <FontAwesome name="book" size={28} color={color} />
-          )
+          ),
+          headerShown: false
         }}
       />
       <Tabs.Screen
@@ -48,6 +49,16 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <Ionicons name="notifications-outline" size={28} color={color} />
           )
+        }}
+      />
+      <Tabs.Screen
+        name="test"
+        options={{
+          title: 'Test',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="settings-outline" size={28} color={color} />
+          ),
+          headerShown: false
         }}
       />
     </Tabs>
