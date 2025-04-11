@@ -1,9 +1,16 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import { FontAwesome } from '@expo/vector-icons'
 
-export default function BookItem({ book }) {
+export default function BookItem({ book, onPress }) {
+  const handleSelectBook = (bookId) => {
+    onPress(bookId)
+  }
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => handleSelectBook(book.id)}
+    >
       {/* Book Cover */}
       <Image
         source={{
@@ -18,7 +25,10 @@ export default function BookItem({ book }) {
       <View style={styles.info}>
         <Text style={styles.title}>{book.title}</Text>
         <Text style={styles.author}>{book.author}</Text>
-        <Text style={styles.likes}>♥ {book.likes || 0}</Text>
+        <Text style={styles.likes}>
+          <FontAwesome name="heart" size={12} />{' '}
+          {book.likes || 0}
+        </Text>
 
         {/* Genres */}
         <View style={styles.genresContainer}>
@@ -29,7 +39,7 @@ export default function BookItem({ book }) {
           ))}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

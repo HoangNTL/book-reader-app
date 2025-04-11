@@ -1,14 +1,16 @@
 import { FlatList } from 'react-native'
 import BookItem from './BookItem'
 
-export default function BookList({ type }) {
+export default function BookList({ type, onPress }) {
   const books = getMockBooks(type)
 
   return (
     <FlatList
       data={books}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <BookItem book={item} />}
+      renderItem={({ item }) => (
+        <BookItem book={item} onPress={onPress} />
+      )}
     />
   )
 }
