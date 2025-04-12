@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -6,7 +6,8 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-} from 'react-native';
+  Image,
+} from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 const books = [
@@ -16,6 +17,7 @@ const books = [
     author: 'Author A',
     likes: 10,
     categories: ['Fiction', 'Adventure'],
+    image: 'https://picsum.photos/60/90?random=1',
   },
   {
     id: '2',
@@ -23,6 +25,7 @@ const books = [
     author: 'Author B',
     likes: 5,
     categories: ['Science', 'Non-fiction'],
+    image: 'https://picsum.photos/60/90?random=2',
   },
   {
     id: '3',
@@ -30,6 +33,7 @@ const books = [
     author: 'Author C',
     likes: 8,
     categories: ['Fantasy'],
+    image: 'https://picsum.photos/60/90?random=3',
   },
   {
     id: '4',
@@ -37,29 +41,33 @@ const books = [
     author: 'Author D',
     likes: 2,
     categories: ['History', 'Biography', 'War'],
+    image: 'https://picsum.photos/60/90?random=4',
   },
-];
+]
 
 export default function SearchScreen() {
-  const [likeCounts, setLikeCounts] = useState(books);
+  const [likeCounts, setLikeCounts] = useState(books)
 
   const handleLike = (id) => {
     const updated = likeCounts.map((book) =>
       book.id === id ? { ...book, likes: book.likes + 1 } : book
-    );
-    setLikeCounts(updated);
-  };
+    )
+    setLikeCounts(updated)
+  }
 
   const renderItem = ({ item }) => (
     <View style={styles.bookItem}>
-      <View style={styles.bookImage} />
+      <Image source={{ uri: item.image }} style={styles.bookImage} />
       <View style={styles.bookInfo}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.author}>{item.author}</Text>
 
         {/* Like + Count */}
         <View style={styles.likeRow}>
-          <TouchableOpacity onPress={() => handleLike(item.id)} style={styles.likeButton}>
+          <TouchableOpacity
+            onPress={() => handleLike(item.id)}
+            style={styles.likeButton}
+          >
             <FontAwesome name="heart" size={18} color="red" />
           </TouchableOpacity>
           <Text style={styles.likeCount}>{item.likes}</Text>
@@ -75,13 +83,18 @@ export default function SearchScreen() {
         </View>
       </View>
     </View>
-  );
+  )
 
   return (
     <View style={styles.container}>
       {/* Search bar */}
       <View style={styles.searchBar}>
-        <FontAwesome name="search" size={18} color="#555" style={styles.searchIcon} />
+        <FontAwesome
+          name="search"
+          size={18}
+          color="#555"
+          style={styles.searchIcon}
+        />
         <TextInput
           placeholder="Search..."
           placeholderTextColor="#555"
@@ -97,7 +110,7 @@ export default function SearchScreen() {
         contentContainerStyle={styles.listContent}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -133,9 +146,9 @@ const styles = StyleSheet.create({
   bookImage: {
     width: 60,
     height: 90,
-    backgroundColor: '#ccc',
     borderRadius: 8,
     marginRight: 12,
+    backgroundColor: '#ccc',
   },
   bookInfo: {
     flex: 1,
@@ -176,4 +189,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#333',
   },
-});
+})
