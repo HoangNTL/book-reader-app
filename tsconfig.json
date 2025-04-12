@@ -7,13 +7,23 @@
       "@/*": [
         "./*"
       ],
-      "@components/*": ["app/components/*"]
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "app/(main)/_layout.app/(main)/index.jsxdex.jsx"  ]
+    "expo-env.d.ts",
+    "app/(main)/_layout.app/(main)/index.jsxdex.jsx",
+    "nativewind-env.d.ts"
+  ]
 }

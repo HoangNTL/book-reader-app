@@ -3,8 +3,12 @@ import { Inter_900Black, useFonts } from '@expo-google-fonts/inter'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-gesture-handler'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import '../../global.css'
 
 SplashScreen.preventAutoHideAsync()
+
+const queryClient = new QueryClient()
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -22,8 +26,10 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(main)/(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <Stack>
+        <Stack.Screen name="(main)/(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </QueryClientProvider>
   )
 }

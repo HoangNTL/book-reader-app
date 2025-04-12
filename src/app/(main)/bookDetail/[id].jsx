@@ -99,51 +99,51 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   backBtn: {
     alignSelf: 'flex-start',
-    marginBottom: 12,
+    marginBottom: 12
   },
   coverImage: {
     width: 160,
     height: 230,
     borderRadius: 12,
-    marginBottom: 16,
+    marginBottom: 16
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 6,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   authorRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 20
   },
   author: {
     fontSize: 16,
-    color: '#555',
+    color: '#555'
   },
   statsRow: {
     flexDirection: 'row',
     gap: 16,
-    marginBottom: 20,
+    marginBottom: 20
   },
   stat: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 6
   },
   statText: {
     fontSize: 14,
-    color: '#444',
+    color: '#444'
   },
   actionRow: {
     flexDirection: 'row',
     gap: 16,
-    marginBottom: 24,
+    marginBottom: 24
   },
   primaryBtn: {
     backgroundColor: '#000',
@@ -153,13 +153,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 24,
     borderRadius: 30,
-    minWidth: 140,
+    minWidth: 140
   },
   primaryBtnText: {
     color: '#fff',
     fontWeight: 'bold',
     marginLeft: 8,
-    fontSize: 15,
+    fontSize: 15
   },
   secondaryBtn: {
     borderWidth: 1,
@@ -170,26 +170,26 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 24,
     borderRadius: 30,
-    minWidth: 140,
+    minWidth: 140
   },
   secondaryBtnText: {
     marginLeft: 8,
     fontWeight: '500',
-    fontSize: 15,
+    fontSize: 15
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     alignSelf: 'flex-start',
     marginBottom: 6,
-    marginTop: 12,
+    marginTop: 12
   },
   tagRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
     marginBottom: 12,
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-start'
   },
   tag: {
     backgroundColor: '#f0f0f0',
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 12,
     fontSize: 13,
-    color: '#333',
+    color: '#333'
   },
   descriptionBox: {
     borderWidth: 1,
@@ -207,11 +207,11 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 100,
     backgroundColor: '#fafafa',
-    marginBottom: 20,
+    marginBottom: 20
   },
   descriptionText: {
     fontSize: 14,
     lineHeight: 20,
-    color: '#333',
-  },
+    color: '#333'
+  }
 })

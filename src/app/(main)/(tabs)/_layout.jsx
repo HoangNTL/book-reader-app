@@ -30,7 +30,7 @@ export default function TabLayout() {
         options={{
           title: 'Library',
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="book" size={28} color={color} />
+            <Ionicons name="library" size={28} color={color} />
           ),
           headerShown: false
         }}

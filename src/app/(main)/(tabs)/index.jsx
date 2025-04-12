@@ -84,42 +84,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 40,
-    paddingHorizontal: 16,
+    // paddingTop: 40,
+    paddingHorizontal: 16
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 20
   },
   appName: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 20
   },
   content: {
-    flex: 1,
+    flex: 1
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 10,
-    marginTop: 10,
+    marginTop: 10
   },
   bookRow: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 20
   },
   bookCard: {
     width: 100,
     height: 140,
     borderRadius: 12,
     backgroundColor: '#ddd',
-    marginRight: 12,
-  },
+    marginRight: 12
+  }
 })
