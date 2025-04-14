@@ -6,7 +6,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Image,
+  Image
 } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
@@ -17,7 +17,7 @@ const books = [
     author: 'Author A',
     likes: 10,
     categories: ['Fiction', 'Adventure'],
-    image: 'https://picsum.photos/60/90?random=1',
+    image: 'https://picsum.photos/60/90?random=1'
   },
   {
     id: '2',
@@ -25,7 +25,7 @@ const books = [
     author: 'Author B',
     likes: 5,
     categories: ['Science', 'Non-fiction'],
-    image: 'https://picsum.photos/60/90?random=2',
+    image: 'https://picsum.photos/60/90?random=2'
   },
   {
     id: '3',
@@ -33,7 +33,7 @@ const books = [
     author: 'Author C',
     likes: 8,
     categories: ['Fantasy'],
-    image: 'https://picsum.photos/60/90?random=3',
+    image: 'https://picsum.photos/60/90?random=3'
   },
   {
     id: '4',
@@ -41,8 +41,8 @@ const books = [
     author: 'Author D',
     likes: 2,
     categories: ['History', 'Biography', 'War'],
-    image: 'https://picsum.photos/60/90?random=4',
-  },
+    image: 'https://picsum.photos/60/90?random=4'
+  }
 ]
 
 export default function SearchScreen() {
@@ -116,9 +116,9 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    // paddingTop: 40,
     paddingHorizontal: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   searchBar: {
     flexDirection: 'row',
@@ -127,55 +127,55 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    marginBottom: 20,
+    marginBottom: 20
   },
   searchIcon: {
-    marginRight: 8,
+    marginRight: 8
   },
   searchInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 16
   },
   listContent: {
-    paddingBottom: 20,
+    paddingBottom: 20
   },
   bookItem: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 20
   },
   bookImage: {
     width: 60,
     height: 90,
     borderRadius: 8,
     marginRight: 12,
-    backgroundColor: '#ccc',
+    backgroundColor: '#ccc'
   },
   bookInfo: {
-    flex: 1,
+    flex: 1
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   author: {
     fontSize: 14,
-    color: '#666',
+    color: '#666'
   },
   likeRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 6,
+    marginTop: 6
   },
   likeButton: {
-    marginRight: 6,
+    marginRight: 6
   },
   likeCount: {
-    fontSize: 14,
+    fontSize: 14
   },
   categoryRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 8,
+    marginTop: 8
   },
   categoryTag: {
     backgroundColor: '#eee',
@@ -183,10 +183,10 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 10,
     marginRight: 6,
-    marginBottom: 6,
+    marginBottom: 6
   },
   categoryText: {
     fontSize: 12,
-    color: '#333',
-  },
+    color: '#333'
+  }
 })

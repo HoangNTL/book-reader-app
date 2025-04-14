@@ -5,15 +5,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./*"
+        "src/*"
       ],
-      "@components/*": ["app/components/*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "app/(main)/_layout.app/(main)/index.jsxdex.jsx"  ]
+    "expo-env.d.ts",
+    "app/(main)/_layout.app/(main)/index.jsxdex.jsx",
+  ]
 }

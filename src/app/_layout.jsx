@@ -1,8 +1,9 @@
-import { Stack } from 'expo-router'
 import { Inter_900Black, useFonts } from '@expo-google-fonts/inter'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-gesture-handler'
+import { Slot } from 'expo-router'
+import { AuthProvider } from '../context/AuthContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -22,8 +23,8 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(main)/(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <AuthProvider>
+      <Slot />
+    </AuthProvider>
   )
 }

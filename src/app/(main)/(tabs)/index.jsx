@@ -4,9 +4,12 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native'
 import { useRouter } from 'expo-router'
+import { useContext } from 'react'
+import { AuthContext } from '@/context/AuthContext'
 
 const bookImages = [
   'https://picsum.photos/100/140?random=1',
@@ -22,6 +25,13 @@ const bookImages = [
 ]
 
 export default function HomeScreen() {
+  const { user, logout } = useContext(AuthContext)
+
+  const handleLogout = () => {
+    logout()
+    router.replace('/(auth)/login')
+  }
+
   const router = useRouter()
 
   const handleSelectBook = (index) => {
@@ -39,11 +49,17 @@ export default function HomeScreen() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.appName}>BookApp</Text>
+
         <Image
           source={{ uri: 'https://i.pravatar.cc/40' }}
           style={styles.avatar}
         />
       </View>
+
+      <TouchableOpacity onPress={handleLogout}>
+        <Text style={{ fontSize: 24 }}>Welcome, {user?.username}</Text>
+        <Button title="Logout" onPress={handleLogout} />
+      </TouchableOpacity>
 
       <ScrollView style={styles.content}>
         {/* Hottest */}
@@ -84,42 +100,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 40,
-    paddingHorizontal: 16,
+    // paddingTop: 40,
+    paddingHorizontal: 16
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 20
   },
   appName: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 20
   },
   content: {
-    flex: 1,
+    flex: 1
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 10,
-    marginTop: 10,
+    marginTop: 10
   },
   bookRow: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 20
   },
   bookCard: {
     width: 100,
     height: 140,
     borderRadius: 12,
     backgroundColor: '#ddd',
-    marginRight: 12,
-  },
+    marginRight: 12
+  }
 })
