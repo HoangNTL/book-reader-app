@@ -15,8 +15,8 @@ import Animated, {
   withTiming,
   runOnJS
 } from 'react-native-reanimated'
-import Header from '@components/reader/Header'
-import PageView from '@components/reader/PageView'
+import Header from '@/components/reader/Header'
+import PageView from '@/components/reader/PageView'
 import { useNavigation } from '@react-navigation/native'
 
 const { width } = Dimensions.get('window')

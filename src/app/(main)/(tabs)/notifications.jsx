@@ -7,7 +7,7 @@ const notifications = [
   { id: '3', title: 'Message', time: 'Yesterday at 6:01 AM' }
 ]
 
-export default function NotificationScreen() {
+export default function NotificationsScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Notifications</Text>

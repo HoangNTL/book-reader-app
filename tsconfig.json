@@ -5,17 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./*"
+        "src/*"
       ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ]
     }
   },
   "include": [
@@ -24,6 +15,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "app/(main)/_layout.app/(main)/index.jsxdex.jsx",
-    "nativewind-env.d.ts"
   ]
 }

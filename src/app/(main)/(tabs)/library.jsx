@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { useState } from 'react'
-import TabBar from '@components/library/TabBar'
-import BookList from '@components/library/BookList'
+import TabBar from '@/components/library/TabBar'
+import BookList from '@/components/library/BookList'
 import { useRouter } from 'expo-router'
 
 export default function LibraryScreen() {

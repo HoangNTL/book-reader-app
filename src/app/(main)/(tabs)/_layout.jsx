@@ -1,10 +1,18 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { Tabs } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { useLayoutEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
-export default function TabLayout() {
+export default function TabsLayout() {
+  const navigation = useNavigation()
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false })
+  }, [navigation])
+
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
+    <Tabs>
       <Tabs.Screen
         name="index"
         options={{

@@ -4,9 +4,12 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native'
 import { useRouter } from 'expo-router'
+import { useContext } from 'react'
+import { AuthContext } from '@/context/AuthContext'
 
 const bookImages = [
   'https://picsum.photos/100/140?random=1',
@@ -22,6 +25,13 @@ const bookImages = [
 ]
 
 export default function HomeScreen() {
+  const { user, logout } = useContext(AuthContext)
+
+  const handleLogout = () => {
+    logout()
+    router.replace('/(auth)/login')
+  }
+
   const router = useRouter()
 
   const handleSelectBook = (index) => {
@@ -39,11 +49,17 @@ export default function HomeScreen() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.appName}>BookApp</Text>
+
         <Image
           source={{ uri: 'https://i.pravatar.cc/40' }}
           style={styles.avatar}
         />
       </View>
+
+      <TouchableOpacity onPress={handleLogout}>
+        <Text style={{ fontSize: 24 }}>Welcome, {user?.username}</Text>
+        <Button title="Logout" onPress={handleLogout} />
+      </TouchableOpacity>
 
       <ScrollView style={styles.content}>
         {/* Hottest */}
