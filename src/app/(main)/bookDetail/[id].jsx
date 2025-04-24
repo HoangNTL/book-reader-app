@@ -5,213 +5,503 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Button,
+  FlatList
 } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
 
-export default function BookDetailScreen() {
+export default function BookDetailScreen({ bookId }) {
+  const books = [
+    {
+      id: '1',
+      title: 'The Great Gatsby',
+      author: 'F. Scott Fitzgerald',
+      views: 100,
+      likes: 100,
+      chapters: 10,
+      genre: ['Fiction', 'Classic'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '2',
+      title: 'To Kill a Mockingbird',
+      author: 'Harper Lee',
+      views: 200,
+      likes: 200,
+      chapters: 20,
+      genre: ['Fiction', 'Classic', 'Drama'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '3',
+      title: '1984',
+      author: 'George Orwell',
+      views: 300,
+      likes: 123,
+      chapters: 15,
+      genre: ['Fiction', 'Dystopian'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '4',
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      views: 456,
+      likes: 456,
+      chapters: 12,
+      genre: ['Fiction', 'Romance'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '5',
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      views: 456,
+      likes: 456,
+      chapters: 12,
+      genre: ['Fiction', 'Romance'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '6',
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      views: 456,
+      likes: 456,
+      chapters: 12,
+      genre: ['Fiction', 'Romance'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '7',
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      views: 456,
+      likes: 456,
+      chapters: 12,
+      genre: ['Fiction', 'Romance'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    },
+    {
+      id: '8',
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      views: 456,
+      likes: 456,
+      chapters: 12,
+      genre: ['Fiction', 'Romance'],
+      image:
+        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+    }
+  ]
+
   const navigation = useNavigation()
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false })
   }, [navigation])
 
-  const book = {
-    title: 'Chairs',
-    author: 'VictoriaMarieS',
-    reads: '701K',
-    votes: '23.5K',
-    parts: '14',
-    image: 'https://i.imgur.com/I80W1Q0.png',
-    tags: ['death', 'horror', 'kidnapping', 'love'],
-    description:
-      '"Okay, where do you want me to start?" "Anywhere you wish." "There were five of us. Dani, Elizabeth, Audrey, Taylor and me. We spent about 9 months in the basement..."'
+  const book = books.find((b) => b.id === bookId) || books[0]
+
+  const router = useRouter()
+
+  const handleReadBook = (bookId) => {
+    router.push(`/bookReader/${bookId}`)
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Back button */}
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.backBtn}
+    <View
+      style={{
+        backgroundColor: '#fff',
+        flex: 1
+      }}
+    >
+      {/* Header */}
+      <View
+        style={{
+          // height: 40,
+          backgroundColor: '#fff',
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: 10
+        }}
       >
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-
-      {/* Book cover */}
-      <Image source={{ uri: book.image }} style={styles.coverImage} />
-
-      {/* Title & Author */}
-      <Text style={styles.title}>{book.title}</Text>
-      <View style={styles.authorRow}>
-        <Text style={styles.author}>{book.author}</Text>
-      </View>
-
-      {/* Stats */}
-      <View style={styles.statsRow}>
-        <View style={styles.stat}>
-          <Ionicons name="eye-outline" size={18} />
-          <Text style={styles.statText}>{book.reads} Reads</Text>
-        </View>
-        <View style={styles.stat}>
-          <Ionicons name="heart-outline" size={18} />
-          <Text style={styles.statText}>{book.votes} Likes</Text>
-        </View>
-        <View style={styles.stat}>
-          <Ionicons name="list-outline" size={18} />
-          <Text style={styles.statText}>{book.parts} Chapters</Text>
-        </View>
-      </View>
-
-      {/* Action buttons */}
-      <View style={styles.actionRow}>
-        <TouchableOpacity style={styles.primaryBtn}>
-          <Ionicons name="book-outline" size={18} color="#fff" />
-          <Text style={styles.primaryBtnText}>Read</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons
+            style={{ marginRight: 16 }}
+            name="arrow-back"
+            size={24}
+            color="black"
+          />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.secondaryBtn}>
-          <Ionicons name="add-outline" size={18} color="#000" />
-          <Text style={styles.secondaryBtnText}>Save</Text>
-        </TouchableOpacity>
+
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: 'bold'
+          }}
+        >
+          {book.title}
+        </Text>
       </View>
 
-      {/* Genre */}
-      <Text style={styles.sectionTitle}>Genre</Text>
-      <View style={styles.tagRow}>
-        {book.tags.map((tag, idx) => (
-          <Text key={idx} style={styles.tag}>
-            {tag}
+      <View>
+        {/* Book Cover */}
+        <View
+          style={{
+            backgroundColor: 'gray',
+            height: 200,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 12
+          }}
+        >
+          <Image
+            source={{
+              uri:
+                book.image ||
+                'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              resizeMode: 'contain'
+            }}
+          />
+        </View>
+
+        {/* Book Title */}
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 12
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20
+            }}
+          >
+            {book.title}
           </Text>
-        ))}
-      </View>
+        </View>
 
-      {/* Description */}
-      <Text style={styles.sectionTitle}>Description</Text>
-      <View style={styles.descriptionBox}>
-        <Text style={styles.descriptionText}>{book.description}</Text>
+        {/* Book Author */}
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 12
+          }}
+        >
+          <Text>{book.author}</Text>
+        </View>
+
+        {/* Book Views, likes, chapters*/}
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 18
+          }}
+        >
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 10
+            }}
+          >
+            {/* Views */}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <FontAwesome
+                name="eye"
+                size={16}
+                color="gray"
+                style={{
+                  marginRight: 5
+                }}
+              />
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: 'gray'
+                }}
+              >
+                {book.views} Reads
+              </Text>
+            </View>
+
+            {/* Likes */}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <FontAwesome
+                name="heart-o"
+                size={16}
+                color="gray"
+                style={{
+                  marginRight: 5
+                }}
+              />
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: 'gray'
+                }}
+              >
+                {book.likes} Likes
+              </Text>
+            </View>
+
+            {/* Chapters */}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <Ionicons
+                name="list-outline"
+                size={16}
+                color="gray"
+                style={{
+                  marginRight: 5
+                }}
+              />
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: 'gray'
+                }}
+              >
+                {book.chapters} Chapters
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Buttons */}
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 24
+          }}
+        >
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 16,
+              marginBottom: 12
+            }}
+          >
+            {/* Read button */}
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: 16
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  // justifyContent: 'center',
+                  gap: 4,
+                  backgroundColor: '#000',
+                  borderRadius: 24,
+                  paddingHorizontal: 48,
+                  paddingVertical: 8
+                }}
+                onPress={() => handleReadBook(book.id)}
+              >
+                <Ionicons name="book-outline" size={18} color="#fff" />
+                <Text
+                  style={{
+                    color: '#fff',
+                    fontSize: 16
+                  }}
+                >
+                  Read
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Add to Library button */}
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: 16
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  // justifyContent: 'center',
+                  gap: 4,
+                  backgroundColor: '#fff',
+                  borderColor: '#000',
+                  borderWidth: 1,
+                  borderRadius: 24,
+                  paddingHorizontal: 48,
+                  paddingVertical: 8
+                }}
+              >
+                <Ionicons name="add-outline" size={18} color="#000" />
+                <Text
+                  style={{
+                    color: '#000',
+                    fontSize: 16
+                  }}
+                >
+                  Save
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        {/* Genre */}
+        <View
+          style={{
+            display: 'flex',
+            // justifyContent: 'center',
+            // alignItems: 'center',
+            marginBottom: 24,
+            paddingHorizontal: 16
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              // fontWeight: 'bold',
+              marginBottom: 4
+            }}
+          >
+            Genre
+          </Text>
+          <FlatList
+            horizontal={true}
+            data={book.genre}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  backgroundColor: '#f0f0f0',
+                  borderRadius: 20,
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  marginRight: 8
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 'bold',
+                    color: 'gray'
+                  }}
+                >
+                  {item}
+                </Text>
+              </View>
+            )}
+          />
+        </View>
+
+        {/* Description */}
+        <View
+          style={{
+            display: 'flex',
+            // justifyContent: 'center',
+            // alignItems: 'center',
+            marginBottom: 24,
+            paddingHorizontal: 16
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              // fontWeight: 'bold',
+              marginBottom: 4
+            }}
+          >
+            Description
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              borderRadius: 8,
+              borderColor: '#f0f0f0',
+              borderWidth: 1,
+              padding: 8
+              // marginBottom: 24
+            }}
+          >
+            {book.description ||
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+          </Text>
+        </View>
+
+        {/* Chapters */}
+        {/* <View>
+          <Text
+            style={{
+              fontSize: 20,
+              // fontWeight: 'bold',
+              marginBottom: 4,
+              paddingHorizontal: 16
+            }}
+          >
+            Chapters
+          </Text>
+          <FlatList
+            data={[...Array(10).keys()]}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  padding: 16,
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#f0f0f0'
+                }}
+              >
+                <Text>Chapter {item + 1}</Text>
+              </View>
+            )}
+          />
+        </View> */}
       </View>
-    </ScrollView>
+    </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center'
-  },
-  backBtn: {
-    alignSelf: 'flex-start',
-    marginBottom: 12
-  },
-  coverImage: {
-    width: 160,
-    height: 230,
-    borderRadius: 12,
-    marginBottom: 16
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 6,
-    textAlign: 'center'
-  },
-  authorRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20
-  },
-  author: {
-    fontSize: 16,
-    color: '#555'
-  },
-  statsRow: {
-    flexDirection: 'row',
-    gap: 16,
-    marginBottom: 20
-  },
-  stat: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6
-  },
-  statText: {
-    fontSize: 14,
-    color: '#444'
-  },
-  actionRow: {
-    flexDirection: 'row',
-    gap: 16,
-    marginBottom: 24
-  },
-  primaryBtn: {
-    backgroundColor: '#000',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 24,
-    borderRadius: 30,
-    minWidth: 140
-  },
-  primaryBtnText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    marginLeft: 8,
-    fontSize: 15
-  },
-  secondaryBtn: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 24,
-    borderRadius: 30,
-    minWidth: 140
-  },
-  secondaryBtnText: {
-    marginLeft: 8,
-    fontWeight: '500',
-    fontSize: 15
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    alignSelf: 'flex-start',
-    marginBottom: 6,
-    marginTop: 12
-  },
-  tagRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 12,
-    alignSelf: 'flex-start'
-  },
-  tag: {
-    backgroundColor: '#f0f0f0',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 12,
-    fontSize: 13,
-    color: '#333'
-  },
-  descriptionBox: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 14,
-    borderRadius: 10,
-    width: '100%',
-    minHeight: 100,
-    backgroundColor: '#fafafa',
-    marginBottom: 20
-  },
-  descriptionText: {
-    fontSize: 14,
-    lineHeight: 20,
-    color: '#333'
-  }
-})

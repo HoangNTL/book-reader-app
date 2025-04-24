@@ -30,7 +30,8 @@ export default function TabsLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="search" color={color} />
           ),
-          headerShown: false
+          headerShown: false,
+          tabBarHideOnKeyboard: true
         }}
       />
       <Tabs.Screen
