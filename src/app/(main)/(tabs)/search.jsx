@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-  View,
-  TextInput} from 'react-native'
+import { View, TextInput } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import BookListVertical from '@/components/bookListVertical'
 
@@ -44,7 +42,12 @@ export default function SearchScreen() {
         />
       </View>
 
-      <View style={{ paddingHorizontal: 8 }}>
+      <View
+        style={{
+          paddingHorizontal: 8,
+          marginBottom: 60
+        }}
+      >
         <BookListVertical />
       </View>
     </View>
