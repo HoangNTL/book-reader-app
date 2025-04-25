@@ -8,13 +8,20 @@ const BookItem = ({ book }) => {
     router.push(`/bookReader/${bookId}`)
   }
 
+  const truncateTitle = (title, maxWords = 3) => {
+    const words = title.split(' ')
+    return words.length > maxWords
+      ? words.slice(0, maxWords).join(' ') + '...'
+      : title
+  }
+
   return (
     <TouchableOpacity onPress={() => handleSelectBook(book.id)}>
       <View
         style={{
-          width: 100,
-          height: 150,
-          margin: 5
+          width: 112,
+          height: 186,
+          margin: 4
         }}
       >
         <Image
@@ -24,11 +31,17 @@ const BookItem = ({ book }) => {
               'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
           }}
           style={{
-            width: '100%',
-            height: '100%'
+            // width: '100%',
+            // height: '90%'
+            width: 112,
+            height: 168
           }}
         />
-        <Text>{book.title}</Text>
+        {/* <Text numberOfLines={1} ellipsizeMode="tail" style={{ width: 100 }}>
+          {book.title}
+        </Text> */}
+
+        <Text>{truncateTitle(book.title)}</Text>
       </View>
     </TouchableOpacity>
   )

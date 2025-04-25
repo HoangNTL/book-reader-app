@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import BookItem from './bookItem'
 
-const BookListVertical = () => {
+const BookListHorizontal = () => {
   const books = [
     {
       id: '1',
@@ -97,11 +97,15 @@ const BookListVertical = () => {
   return (
     <FlatList
       data={books}
+      horizontal
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <BookItem book={item} />}
-      showsVerticalScrollIndicator={false}
+      // contentContainerStyle={{
+      //   paddingHorizontal: 16
+      // }}
+      showsHorizontalScrollIndicator={false}
     />
   )
 }
 
-export default BookListVertical
+export default BookListHorizontal

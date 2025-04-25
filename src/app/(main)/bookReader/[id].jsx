@@ -4,7 +4,7 @@ import {
   Text,
   Dimensions,
   // StyleSheet,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
   // ScrollView,
   // TouchableOpacity,
   // Pressable
@@ -25,10 +25,11 @@ import { useNavigation } from '@react-navigation/native'
 // import { useRouter } from 'expo-router'
 // import { Platform } from 'react-native'
 import Header from './Header'
+// import { useLocalSearchParams } from 'expo-router'
 
 const { width, height } = Dimensions.get('window')
 
-export default function BookReaderScreen({ bookId }) {
+export default function BookReaderScreen() {
   const book = {
     title: 'The Great Gatsby',
     chapters: [
@@ -138,6 +139,7 @@ export default function BookReaderScreen({ bookId }) {
       }
     ]
   }
+  // console.log('bookid', useLocalSearchParams())
 
   const navigation = useNavigation()
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)

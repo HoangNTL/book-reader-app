@@ -33,7 +33,9 @@ const BookListGrid = ({ type }) => {
     <View
       style={{
         flex: 1,
-        padding: 16
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}
     >
       <FlatList

@@ -13,8 +13,9 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
+import { useLocalSearchParams } from 'expo-router'
 
-export default function BookDetailScreen({ bookId }) {
+export default function BookDetailScreen() {
   const books = [
     {
       id: '1',
@@ -106,13 +107,15 @@ export default function BookDetailScreen({ bookId }) {
     }
   ]
 
+  const { id } = useLocalSearchParams()
+
   const navigation = useNavigation()
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false })
   }, [navigation])
 
-  const book = books.find((b) => b.id === bookId) || books[0]
+  const book = books.find((b) => b.id === id) || books[0]
 
   const router = useRouter()
 
