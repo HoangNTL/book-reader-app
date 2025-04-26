@@ -4,15 +4,35 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
 
-const BookItem = ({ book }) => {
+type Genre = {
+  id: number,
+  name: string
+}
+
+type Book = {
+  id: string,
+  title: string,
+  author: string,
+  views: number,
+  likes: number,
+  chapters: number,
+  genres: Genre[],
+  image: string
+}
+
+type BookItemProps = {
+  book: Book
+}
+
+const BookItem: React.FC<BookItemProps> = ({ book }) => {
   const router = useRouter()
 
-  const handleSelectBook = (bookId) => {
-    router.push(`/bookDetail/${bookId}`)
+  const handleSelectBook = () => {
+    router.push(`/bookDetail/${book.id}`)
   }
 
   return (
-    <TouchableOpacity onPress={() => handleSelectBook(book.id)}>
+    <TouchableOpacity onPress={handleSelectBook}>
       <View
         style={{
           flexDirection: 'row',
@@ -36,7 +56,7 @@ const BookItem = ({ book }) => {
         {/* Book information */}
         <View
           style={{
-            display: 'flex',
+            // display: 'flex',
             justifyContent: 'space-between'
           }}
         >
@@ -149,8 +169,9 @@ const BookItem = ({ book }) => {
           <View>
             <FlatList
               horizontal={true}
-              data={book.genre}
-              //   keyExtractor={(item) => item.id}
+              data={book.genres}
+              keyExtractor={(item) => item.id.toString()}
+              // keyExtractor={(item, index) => item + index}
               renderItem={({ item }) => (
                 <View
                   style={{
@@ -167,7 +188,7 @@ const BookItem = ({ book }) => {
                       color: 'gray'
                     }}
                   >
-                    {item}
+                    {item.name}
                   </Text>
                 </View>
               )}
@@ -176,7 +197,7 @@ const BookItem = ({ book }) => {
         </View>
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 export default BookItem
