@@ -3,16 +3,26 @@ import { FlatList, View, Image, Text, TouchableOpacity } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
+import { Book } from '@/types'
+import { useBookStore } from '@/store/bookStore'
 
-const BookItem = ({ book }) => {
+type BookItemProps = {
+  book: Book
+}
+
+const BookItem: React.FC<BookItemProps> = ({ book }) => {
   const router = useRouter()
+  const { setSelectedBook } = useBookStore()
 
-  const handleSelectBook = (bookId) => {
-    router.push(`/bookDetail/${bookId}`)
+
+  const handleSelectBook = () => {
+    setSelectedBook(book)
+
+    router.push(`/bookDetail/${book.id}`)
   }
 
   return (
-    <TouchableOpacity onPress={() => handleSelectBook(book.id)}>
+    <TouchableOpacity onPress={handleSelectBook}>
       <View
         style={{
           flexDirection: 'row',
@@ -36,7 +46,7 @@ const BookItem = ({ book }) => {
         {/* Book information */}
         <View
           style={{
-            display: 'flex',
+            // display: 'flex',
             justifyContent: 'space-between'
           }}
         >
@@ -149,8 +159,9 @@ const BookItem = ({ book }) => {
           <View>
             <FlatList
               horizontal={true}
-              data={book.genre}
-              //   keyExtractor={(item) => item.id}
+              data={book.genres}
+              keyExtractor={(item) => item.id.toString()}
+              // keyExtractor={(item, index) => item + index}
               renderItem={({ item }) => (
                 <View
                   style={{
@@ -167,7 +178,7 @@ const BookItem = ({ book }) => {
                       color: 'gray'
                     }}
                   >
-                    {item}
+                    {item.name}
                   </Text>
                 </View>
               )}

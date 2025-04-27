@@ -1,10 +1,15 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { Feather, Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import Animated from 'react-native-reanimated'
 
-const Header = ({ title, chapter }) => {
+type HeaderProps = {
+  title: string
+  chapter: string
+}
+
+const Header: React.FC<HeaderProps> = ({ title, chapter }) => {
   const router = useRouter()
 
   return (
@@ -36,7 +41,11 @@ const Header = ({ title, chapter }) => {
         }}
       >
         <TouchableOpacity onPress={() => router.back()}>
-          <Feather name="arrow-left" size={24} color="black" />
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color="black"
+          />
         </TouchableOpacity>
         <View>
           <Text
