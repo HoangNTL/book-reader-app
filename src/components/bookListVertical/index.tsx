@@ -1,22 +1,7 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import BookItem from './bookItem'
-
-type Genre = {
-  id: number,
-  name: string
-}
-
-type Book = {
-  id: string,
-  title: string,
-  author: string,
-  views: number,
-  likes: number,
-  chapters: number,
-  genres: Genre[],
-  image: string
-}
+import { Book } from '@/types'
 
 type BookListVerticalProps = {
   books: Book[]

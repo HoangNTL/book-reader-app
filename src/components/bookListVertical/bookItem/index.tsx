@@ -3,22 +3,8 @@ import { FlatList, View, Image, Text, TouchableOpacity } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
-
-type Genre = {
-  id: number,
-  name: string
-}
-
-type Book = {
-  id: string,
-  title: string,
-  author: string,
-  views: number,
-  likes: number,
-  chapters: number,
-  genres: Genre[],
-  image: string
-}
+import { Book } from '@/types'
+import { useBookStore } from '@/store/bookStore'
 
 type BookItemProps = {
   book: Book
@@ -26,8 +12,12 @@ type BookItemProps = {
 
 const BookItem: React.FC<BookItemProps> = ({ book }) => {
   const router = useRouter()
+  const { setSelectedBook } = useBookStore()
+
 
   const handleSelectBook = () => {
+    setSelectedBook(book)
+
     router.push(`/bookDetail/${book.id}`)
   }
 
@@ -197,7 +187,7 @@ const BookItem: React.FC<BookItemProps> = ({ book }) => {
         </View>
       </View>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 export default BookItem

@@ -14,98 +14,11 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import { useLocalSearchParams } from 'expo-router'
+import { useBookStore } from '@/store/bookStore'
 
 export default function BookDetailScreen() {
-  const books = [
-    {
-      id: '1',
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
-      views: 100,
-      likes: 100,
-      chapters: 10,
-      genre: ['Fiction', 'Classic'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '2',
-      title: 'To Kill a Mockingbird',
-      author: 'Harper Lee',
-      views: 200,
-      likes: 200,
-      chapters: 20,
-      genre: ['Fiction', 'Classic', 'Drama'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '3',
-      title: '1984',
-      author: 'George Orwell',
-      views: 300,
-      likes: 123,
-      chapters: 15,
-      genre: ['Fiction', 'Dystopian'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '4',
-      title: 'Pride and Prejudice',
-      author: 'Jane Austen',
-      views: 456,
-      likes: 456,
-      chapters: 12,
-      genre: ['Fiction', 'Romance'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '5',
-      title: 'Pride and Prejudice',
-      author: 'Jane Austen',
-      views: 456,
-      likes: 456,
-      chapters: 12,
-      genre: ['Fiction', 'Romance'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '6',
-      title: 'Pride and Prejudice',
-      author: 'Jane Austen',
-      views: 456,
-      likes: 456,
-      chapters: 12,
-      genre: ['Fiction', 'Romance'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '7',
-      title: 'Pride and Prejudice',
-      author: 'Jane Austen',
-      views: 456,
-      likes: 456,
-      chapters: 12,
-      genre: ['Fiction', 'Romance'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    },
-    {
-      id: '8',
-      title: 'Pride and Prejudice',
-      author: 'Jane Austen',
-      views: 456,
-      likes: 456,
-      chapters: 12,
-      genre: ['Fiction', 'Romance'],
-      image:
-        'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
-    }
-  ]
+
+  const { selectedBook } = useBookStore()
 
   const { id } = useLocalSearchParams()
 
@@ -115,12 +28,10 @@ export default function BookDetailScreen() {
     navigation.setOptions({ headerShown: false })
   }, [navigation])
 
-  const book = books.find((b) => b.id === id) || books[0]
-
   const router = useRouter()
 
-  const handleReadBook = (bookId) => {
-    router.push(`/bookReader/${bookId}`)
+  const handleReadBook = () => {
+    router.push(`/bookReader/${id}`)
   }
 
   return (
@@ -140,7 +51,7 @@ export default function BookDetailScreen() {
           padding: 10
         }}
       >
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => router.back()}>
           <Ionicons
             style={{ marginRight: 16 }}
             name="arrow-back"
@@ -155,7 +66,7 @@ export default function BookDetailScreen() {
             fontWeight: 'bold'
           }}
         >
-          {book.title}
+          {selectedBook?.title}
         </Text>
       </View>
 
@@ -175,7 +86,7 @@ export default function BookDetailScreen() {
           <Image
             source={{
               uri:
-                book.image ||
+                selectedBook?.image ||
                 'https://thanhnien.mediacdn.vn/Uploaded/minhnguyet/2022_05_08/bia-sach2-9886.jpg'
             }}
             style={{
@@ -200,7 +111,7 @@ export default function BookDetailScreen() {
               fontSize: 20
             }}
           >
-            {book.title}
+            {selectedBook?.title}
           </Text>
         </View>
 
@@ -213,7 +124,7 @@ export default function BookDetailScreen() {
             marginBottom: 12
           }}
         >
-          <Text>{book.author}</Text>
+          <Text>{selectedBook?.author}</Text>
         </View>
 
         {/* Book Views, likes, chapters*/}
@@ -253,7 +164,7 @@ export default function BookDetailScreen() {
                   color: 'gray'
                 }}
               >
-                {book.views} Reads
+                {selectedBook?.views} Reads
               </Text>
             </View>
 
@@ -278,7 +189,7 @@ export default function BookDetailScreen() {
                   color: 'gray'
                 }}
               >
-                {book.likes} Likes
+                {selectedBook?.likes} Likes
               </Text>
             </View>
 
@@ -303,7 +214,7 @@ export default function BookDetailScreen() {
                   color: 'gray'
                 }}
               >
-                {book.chapters} Chapters
+                {selectedBook?.chapters} Chapters
               </Text>
             </View>
           </View>
@@ -346,7 +257,7 @@ export default function BookDetailScreen() {
                   paddingHorizontal: 48,
                   paddingVertical: 8
                 }}
-                onPress={() => handleReadBook(book.id)}
+                onPress={handleReadBook}
               >
                 <Ionicons name="book-outline" size={18} color="#fff" />
                 <Text
@@ -418,7 +329,7 @@ export default function BookDetailScreen() {
           </Text>
           <FlatList
             horizontal={true}
-            data={book.genre}
+            data={selectedBook?.genres}
             renderItem={({ item }) => (
               <View
                 style={{
@@ -436,7 +347,7 @@ export default function BookDetailScreen() {
                     color: 'gray'
                   }}
                 >
-                  {item}
+                  {item.name}
                 </Text>
               </View>
             )}
@@ -472,7 +383,7 @@ export default function BookDetailScreen() {
               // marginBottom: 24
             }}
           >
-            {book.description ||
+            {selectedBook?.description ||
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
           </Text>
         </View>

@@ -3,22 +3,7 @@ import { View, TextInput } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import BookListVertical from '@/components/bookListVertical'
 import { supabase } from '@/lib/supabase'
-
-type Genre = {
-  id: number,
-  name: string
-}
-
-type Book = {
-  id: string,
-  title: string,
-  author: string,
-  views: number,
-  likes: number,
-  chapters: number,
-  genres: Genre[],
-  image: string
-}
+import { Book, Genre } from '@/types'
 
 export default function SearchScreen() {
   const [books, setBooks] = useState<Book[]>([])
@@ -31,7 +16,7 @@ export default function SearchScreen() {
     const { data, error } = await supabase
       .from('books')
       .select(
-        'id, title, author, views_count, total_likes, total_chapters, cover_image, book_genres (genre_id), genres (id, name)'
+        'id, title, author, views_count, total_likes, total_chapters, cover_image, description, book_genres (genre_id), genres (id, name)'
       )
       .eq('is_deleted', false)
 
@@ -40,7 +25,6 @@ export default function SearchScreen() {
       return
     }
 
-    // Chuyển đổi dữ liệu thành định dạng mong muốn
     const formattedBooks: Book[] = (data || []).map((book: any) => {
       const genres: Genre[] = book.genres.map((bg: any) => ({
         id: bg.id,
@@ -55,7 +39,8 @@ export default function SearchScreen() {
         likes: book.total_likes,
         chapters: book.total_chapters,
         genres: genres,
-        image: book.cover_image
+        image: book.cover_image,
+        description: book.description
       }
     })
 
