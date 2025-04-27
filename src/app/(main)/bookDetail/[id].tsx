@@ -31,7 +31,13 @@ export default function BookDetailScreen() {
   const router = useRouter()
 
   const handleReadBook = () => {
-    router.push(`/bookReader/${id}`)
+    router.push({
+      pathname: '/bookReader/[id]',
+      params: {
+        id: id.toString(),
+        title: selectedBook?.title
+      }
+    })
   }
 
   return (

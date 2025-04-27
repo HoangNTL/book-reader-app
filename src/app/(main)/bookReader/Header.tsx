@@ -4,7 +4,12 @@ import { Feather, Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import Animated from 'react-native-reanimated'
 
-const Header = ({ title, chapter }) => {
+type HeaderProps = {
+  title: string
+  chapter: string
+}
+
+const Header: React.FC<HeaderProps> = ({ title, chapter }) => {
   const router = useRouter()
 
   return (
