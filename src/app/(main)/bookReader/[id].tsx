@@ -205,7 +205,7 @@ export default function BookReaderScreen() {
         >
           {/* Header  */}
           {isHeaderVisible && (
-            <Header title={title} chapter={currentChapter?.title || ''} />
+            <Header title={title || 'Unknow title'} chapter={currentChapter?.title || ''} />
           )}
 
           <TouchableWithoutFeedback onPress={handleTap}>

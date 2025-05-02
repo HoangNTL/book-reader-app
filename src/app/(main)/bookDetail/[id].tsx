@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import {
   View,
   Text,
@@ -15,10 +15,12 @@ import { useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import { useLocalSearchParams } from 'expo-router'
 import { useBookStore } from '@/store/bookStore'
+import { supabase } from '@/lib/supabase'
+import { Book, Genre } from '@/types'
 
 export default function BookDetailScreen() {
 
-  const { selectedBook } = useBookStore()
+  const { selectedBook, setSelectedBook } = useBookStore()
 
   const { id } = useLocalSearchParams()
 
@@ -38,6 +40,50 @@ export default function BookDetailScreen() {
         title: selectedBook?.title
       }
     })
+  }
+
+  useEffect(() => {
+    fetchBookDetail(id.toString())
+  }, [])
+
+  const fetchBookDetail = async (bookId: string) => {
+    const { data, error } = await supabase
+      .from('books')
+      .select(`
+        id, title, author, views_count, total_likes, total_chapters,
+        cover_image, description,
+        book_genres (
+          genres (
+            id, name
+          )
+        )
+      `)
+      .eq('id', bookId)
+      .single()
+
+    if (error) {
+      console.error('Error fetching book detail:', error)
+      return
+    }
+
+    const genres: Genre[] = data?.book_genres?.map((bg: any) => ({
+      id: bg.genres.id,
+      name: bg.genres.name
+    }))
+
+    const formattedBook: Book = {
+      id: data.id.toString(),
+      title: data.title,
+      author: data.author,
+      views: data.views_count,
+      likes: data.total_likes,
+      chapters: data.total_chapters,
+      genres: genres,
+      image: data.cover_image,
+      description: data.description
+    }
+
+    setSelectedBook(formattedBook)
   }
 
   return (

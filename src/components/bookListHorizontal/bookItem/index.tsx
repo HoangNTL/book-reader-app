@@ -1,9 +1,15 @@
 import React from 'react'
 import { Image, Text, TouchableOpacity } from 'react-native'
 import { useRouter } from 'expo-router'
+import { Book } from '@/types'
 
-const BookItem = ({ book }) => {
+type BookItemProps = {
+  book: Book
+}
+
+const BookItem: React.FC<BookItemProps> = ({ book }) => {
   const router = useRouter()
+  console.log('book', book)
 
   return (
     <TouchableOpacity
@@ -13,7 +19,7 @@ const BookItem = ({ book }) => {
       }}
     >
       <Image
-        source={{ uri: book.image }}
+        source={{ uri: book?.image }}
         style={{
           width: 112,
           height: 168,

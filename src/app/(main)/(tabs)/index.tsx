@@ -97,7 +97,7 @@ export default function HomeScreen() {
             marginBottom: 20
           }}
         >
-          <BookListHorizontal />
+          <BookListHorizontal type="topViewed" />
         </View>
 
         <Text
@@ -112,7 +112,7 @@ export default function HomeScreen() {
         </Text>
 
         {/* Newest Books */}
-        <BookListHorizontal />
+        <BookListHorizontal type="latestUpdated" />
       </View>
     </View>
   )
